@@ -1,0 +1,212 @@
+﻿第十九讲：编程练习 面向对象
+实例一：设计用户登录的小程序
+OOPBasicPrj:
+class Users{
+    String username;
+    String password;
+    Users(String username,String password){
+        this.username = username;
+        this.password = password;
+    }
+}
+
+
+public class LoginDemo{
+    Users user;
+    public boolean userLogin(String username,String password){
+        if(this.user.username.equals(username)&&this.user.password.equals(password)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public void setUser(Users user){
+        this.user = user;
+    }
+
+    public static void main(String[] args){
+        String username;
+        String password;
+        int iCount=0;
+        boolean flag = false;//判断是否登陆成功
+
+        Scanner in = new Scanner(System.in);
+        System.out.println("******用户注册*******");
+        System.out.println("请输入用户名");
+        username = in.next();
+        System.out.println("请输入密码");
+        password = in.next();
+
+        Users u = new Users(username,password);
+        LoginDemo demo = new LoginDemo();
+        demo.setUser(u);
+
+        System.out.println("注册成功");
+
+        System.out.println("******用户登录*******");
+        do{
+            System.out.println("请输入用户名");
+            username = in.next();
+            System.out.println("请输入密码");
+            password = in.next();
+            if(demo.userLogin(username,password)){
+                break;
+            }else{
+                iCount++;
+                if(iCount>=3&&flag==false){
+                    System.out.println("登录失败次数超过3次，程序即将推出");
+                    System.exit(0);
+                }else{
+                    System.out.println("请检查用户名和密码");
+                }
+            }
+
+
+        }while(true);
+        System.out.println("登陆成功");
+    }
+}
+
+//数据结构：设计一个学生类
+节点类：数据域和指向下个节点的指针域
+单向链表类：给该单向链表添加五个节点 设计链表的初始化方法和遍历方法
+
+线性结构：n个数据元素的有序（次序）集合
+1：集合中必存在唯一一个第一个元素
+2：集合中必存在唯一一个最后一个元素
+3：除最后元素，其他都有后继
+4：除最先元素，都有前驱
+class Students{
+    String name;
+    int age;
+
+    Students(String name,int age){
+        this.name =name;
+        this.age = age;
+    }
+    public void showInfo(){
+        System.out.println("姓名"+this.name+",年龄"+this.age);
+    }
+}
+
+class Node{
+    Students data;//数据域
+    Node next;//指向下个节点得指针域
+
+    Node(){
+
+    }
+    Node(Students data){
+        this.data = data;
+        this.next = null;
+    }
+}
+
+//单向链表类
+public class LinkDemo{
+    //初始化方法
+    public static void init(Students[] stus,Node root){
+        Node temp = root;
+        for(Students s:stus){
+        //生成新的节点
+            Node node = new Node(s);
+            temp.next = node;
+            temp = temp.next;
+        }
+    }
+
+    //遍历方法
+    public static void iterator(Node root){
+        Node temp = root;
+        while(temp.next!=null){
+            temp = temp.next;
+            temp.data.showInfo();
+        }
+    }
+
+
+    public static void main(String[] args){
+        Students[] stus = {
+            new Student("张三",18),
+            new Student("李四",14),
+            new Student("王五",21),
+            new Student("赵六",24),
+            new Student("孙琦",19),
+        };
+        //生成一个头结点
+        Node root = new Node();
+        LinkDemo.init(stus,root);
+        LinkDemo.iterator(root);
+    }
+}
+
+第二十讲：面向对象高级   继承 方法重写  方法重载之间区别
+多态性--核心
+
+继承：子类继承了父类的属性和方法
+java采用单根继承，Object是所有类的间接父类  Object类是隐含的
+注意：构造方法不能被继承
+
+public class Animal{
+    int age;
+    double height;
+    double weight;
+
+    Animal(){
+        System.out.println("一个动物诞生");
+    }
+
+    public static void sleep(){
+        System.out.println("sleep");
+    }
+}
+
+public class Human extends Animal{
+    //表示人类从动物这继承过来  extends关键字
+    Human(){
+            System.out.println("一个人诞生");
+        }
+    @Override    //重写 注解
+    public void sleep(){
+        System.out.println("躺在床上舒服碎觉");
+    }
+}
+
+public class Test{
+public static void main(){
+    Human h = new Human();
+    h.age;
+    h.height;
+    h.weight;
+    h.sleep();
+}
+
+}
+//生成子类对象，先执行父类构造方法，在执行子类的构造方法
+
+继承的好处：提高代码的可复用性
+
+方法重写：override overwrite
+子类重写了从父类继承过来的方法
+和方法重载的区别：
+方法重载：overload  方法名字相同，参数个数，类型，次序不同
+
+相同点：都是种多态性的表现，方法重写属于动态的多态性，-动态联编
+方法重载属于静态的多态性 --静态联编
+
+不同点：方法重写有继承，方法重载无继承
+
+多态：指的是同一种行为在不同的对象上有不同的表现形式
+实例：
+
+
+
+
+
+
+
+
+
+
+

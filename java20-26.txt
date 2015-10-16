@@ -1,0 +1,291 @@
+/*
+ * 第二十讲：多态
+ * 所谓多态：就是同一行为在不同对象上有不同的表现形式
+ * 叫声：不同
+ * 出现多态性三个条件：
+ * 1：有继承
+ * 2：方法重写
+ * 3：父类引用指向子类对象
+ * 
+ * Animal h = new Human();//引用 指向子类对象
+ * h.sleep();//子类在睡觉
+ *父子类都有sleep方法  extends继承
+ * 
+ * public class Fish extends Animal{
+ * 	@override
+ * 	public void sleep(){
+ * 	System.out.println("睁眼睛睡觉");
+ * }
+ * }
+ * public class Horse extends Animal{
+ * 	@override
+ * public void sleep(){
+ * 	System.out.println("站着睡觉");
+ * }
+ * }
+ * 
+ * Animal f = new Fish();
+ * f.sleep();//鱼睡觉  发生多态性
+ * 三个条件皆要满足！
+ * 方法重写：子类重写父类继承来的方法
+ * 
+ * 
+ * 第21讲：final关键字  用法
+ * final关键字：修饰常量   常量名字一般大写
+ * 1：修饰属性：  表示属性是个常量
+ * 2：修饰方法：
+ * 3：修饰类：
+ * 4：修饰形参：
+ * 
+ * 修饰属性：修饰基本数据类型的属性表示属性值不能改变   且要初始化(常量)
+ * 修饰引用数据类型的属性表示对象不能改变，并且必须有效初始化
+ * finaldemo里有例子
+ * 
+ * 修饰方法：表示该方法不能被重写
+ * 
+ * 修饰类：表示类不能被继承
+ * 
+ * 开发中：觉得自己写的很完美，不用扩展 重写    就可以设计为最终类   
+ * 
+ * 修饰形参：基本数据类型：值不能改变    引用数据类型：对象值能改变，形参所指向对象不能改变
+ * 
+ * public void change(final Person p){
+ * 	p.name = "张三丰";
+ * 	p = new Person("张三丰",12);//不能这样赋值，他是引用数据类型，
+ *p指向对象不能改变
+ * }
+ * ...
+ * Person p = new Person("张飞",19);
+ * f.change(p);//是张三丰
+ * 
+ * 22讲：super关键字和抽象类
+ * 继承要注意的几点：
+ * 1：属性不可重写，属性可以覆盖     多态要满足三个条件，缺一不可
+ * 2：属性没有多态性，属性值取决于引用类型
+ * 3：方法可以重写，方法有多态性
+ * 4：方法的行为取决于对象而不取决于引用类型
+ * 5：生成子类对象必须调用父类构造方法，子类构造方法必须和父类构造方法匹配
+ * 当你生成子类对象时，会默认去执行父类的不带参数的构造方法
+ * 指定执行带参数父类构造方法：B(String name){
+ * 	super(name);//调用父类带name的构造方法
+ * 。。。
+ * }
+ * 
+ * 匹配：得有父类构造方法
+ * 
+ * super关键字：引用父类对象的属性和方法
+ * 调用父类构造方法  -- 》 super(name);//调用一个属性的父类构造方法  
+ * 必须写在第一句
+ * 
+ * super.name//获得父类对象的属性
+ * 
+ * 抽象类：声明为abstract的类
+ * 抽象不能实例化，只能实例化抽象类的非抽象子类对象
+ * 有抽象方法的类一定是抽象类：类要用abstract修饰，不然会报错
+ * 抽象类不一定有抽象方法
+ * 
+ * 生活中一些抽象的或者定义事物本质的概念，适合用抽象去描述
+ * 形状  美女  菜  水果。。。
+ * 实例化：new MyClass();//public abstract class MyClass{..}
+ * 
+ * 所谓抽象方法：没有方法体的方法，并且要声明为abstract
+ * public abstract void fn();//这里是抽象方法
+ * public void m(){
+ * 	
+ * }//非抽象方法
+ * 
+ * 抽象类不能实例化，只能实例化抽象类的非抽象子类对象
+ * 当父类有抽象方法时，非抽象子类要么是抽象的，
+ * 要么加个父类抽象方法的方法重写但是不是抽象的
+ * 
+ * 23讲：接口
+ * 接口：interface  是种特殊的抽象类
+ * 接口里面的属性都是public static final类型的 ，
+ * 接口里面的方法都是public abstract类型的
+ * 一个类可以实现多个接口，但是只能继承一个父类
+ * 接口可以多重继承，继承多个父类接口
+ * 接口侧重于描述对象的功能性特征
+ * 选择interface可以创建接口：
+ * public interface MyInterface{
+ * 	public int NUM = 100;//public static final int num = 100;要初始化
+ * 	public void fn();//public abstract void fn()
+ * 
+ * }//可以不写static final
+ * 
+ * public interface MyInterface2{
+ * 	public void method();
+ * }
+ * 
+ * public class Test implements MyInterface,MyInterface2{
+ * 	@Override
+ * public void fn(){
+ * 
+ * }
+ * public void method(){
+ * 
+ * }
+ * 
+ * }//类实现接口，就要实现接口中的抽象方法  若接口名字相同，则本类中方法同时实现几个接口中的方法
+ * 
+ * public interface MyInterface extends MyInterface,MyInterface2{
+ * 	public void catch();
+ * }//接口可以继承多个父类接口  继承了方法和属性     静态推荐使用类名去访问
+ * 
+ * 继承接口也属于继承，多态会有体现
+ * class Cat implements CatchMouse{}
+ * ((cat)c).catchMouse();//强制类型转换使他可以使用catchMouse方法
+ * 
+ * 接口和抽象类：
+ * 抽象类描述了事物本质！xxx is a xx；
+ * 接口描述了事物的功能！xxx has a xx；
+ * 
+ * 实例：设计一个盼盼防盗门的程序
+ * --抽象类  门    接口  防盗功能
+ * 
+ * 24讲：instanceof  抽象类和接口的应用
+ * instanceof：判断对象是否属于指定类型   （对象 instanceof 类型）用法
+ * public class Pet extends Animal{
+ * 	String name;
+ * 	public void playWithOwner(){
+ * 	System.out.println("陪主人玩");
+ * }
+ * 	}
+ * public class Dog extends Pet implements CatchMouse{
+ * 	public void catchMouse(){
+ * 	System.out.println("狗抓耗子");
+ * }
+ * }
+ * public class Cat extends Pet implements CatchMouse{
+ * 	public void catchMouse(){
+ * 	System.out.println("猫抓耗子");
+ * }
+ * }
+ * public class Tiger extends Animal{
+ * 
+ * }
+ * 
+ * public class Test{
+ * 	public static void checkAnimal(Animal a){
+ * 	if(a instanceof Pet){
+ * 		if(a instaceof CatchMouse){//判断是否能抓耗子的宠物
+ * 			System.out.println("该动物属于能抓耗子宠物");
+ * 		}else{
+ * 			System.out.println("该动物属于普通宠物");
+ * 		}
+ * 	}else{
+ * 		System.out.println("该动物不属于宠物");
+ * 	}
+ * }
+ * 	public static void main(String[] args){
+ * 		Animal a = new Tiger();
+ * 		a.checkAnimal();//不属于宠物
+ * }
+ * }
+ * 
+ * a instaceof CatchMouse;a是否实现这个接口
+ * 
+ * 抽象类和接口的应用：智能机的实例
+ * OOA分析设计类时，应该从事物的本质和功能两方面去分析，
+ * 事物本质用抽象类，事物功能用接口去描述
+ * 
+ * 25讲：封转类  装箱和拆箱  String和其他转换
+ * 封转类：Integer--int  Float--float  Double--double
+ *   Character--char  Boolean--boolean  Long
+ * Encapsulation：封装
+ * public class EncapsulationDemo{
+ * 		public static void main(String[] args){
+ * 			int n1 = 100;//不是对象
+ * 			Integer n2 = new Integer(100);//表示生成一个整型对象
+ * 			Integer n3 = new Integer("100");
+ * 			//Integer n3 = new Integer("abc");//抛出异常	
+ * 
+ * 			Float f = new Float(3.1);
+ * Float f = new Float("3.1");//都可以的
+ * }
+ * }  
+ * 
+ * 装箱和拆箱：
+ * 装箱：Integer n = 100;//5.0之后就开始支持 基本数据类型赋给对象
+ * 拆箱：int num = new Integer(100);//封装对象赋给基本数据类型
+ * 
+ * String和基本数据类型之间的转换：
+ * 从基本数据类型转换为String类型：
+ * int num = 100;
+ * String s = String.valueOf(num);//有好多种，看要转的是什么格式的数据
+ * 
+ * Integer n = new Integer(100);
+ * s = String.valueOf(n);//自动拆箱
+ * 
+ * String装换为基本数据类型：
+ * String s2 = "1000";
+ * int i = (int)s2;//错误 
+ * int i = new Integer(s2);//第一种方法
+ * int i = Integer.parseInt(s2);//常用第二种 保证字符串是数据类型的可以用
+ * 
+ * String s3 = "3.2";
+ * double d2 = Double.parseDouble(s3);
+ * boolean b2 = Boolean.parseBoolean(s3);
+ * float b2 = Float.parseFloat(s3);
+ * 
+ * 26讲：包  访问控制权限
+ * 包：目录结构  通常使用小写 ，且是倒写的域名  cn.com.sina
+ * package 包名;第一句
+ * 使用包好处：便于组织和管理
+ * 
+ * package net;
+ * import cn.com.sina.A;//引入A类 在cn.com.sina包下
+ * public class B{
+ * 	public static void main(String[] args){
+ * 		A a = new A();
+ * 		hello.A a2 = new hello.A();//hello包下的A类
+ * }
+ * }//不能引入两个名字相冲突的类
+ * 
+ * java访问控制权限：
+ * 看见：        public  protected     默认        private
+ * 本类：           可以            可以                          可以访问     可以访问
+ * 同包下别的类：可以         可以                        可以                不能
+ * 同包中的子类：可以          可以                        可以                不能
+ * 包外子类：         可以         (属性值)不能       不能               不能
+ * （需要导入）		 通过继承可以获得
+ * 包外非子类的类：可以       不能                       不能              不能
+ * 
+ * 包外子类：通过子类对象来访问protected属性或方法
+ * 
+ * 用来修饰类的访问修饰符：
+ * 可访问控制符：公共类修饰符public
+ * 非访问控制符：抽象类修饰符abstract   最终类修饰符final
+ * 
+ * 用来修饰属性访问修饰符：
+ * 可访问修饰符：public  private protected
+ * 非访问修饰符：static final   易失（共享）域修饰符volatile
+ * 暂时性域修饰符transient
+ * 
+ * transient：告诉编译器，在类对象序列化时，此变量不需要持久保存
+ * volatile：指出可能有多个线程修改此变量，要求编译器优化以保证此变量的修改能够被正确的处理
+ * 
+ * 用来修饰方法的访问修饰符：
+ * 可访问控制符：public  private  protected
+ * 非访问控制符：abstract static final native
+ *  synchronized
+ * 
+ * 用来修饰方法变量的访问修饰符：
+ * final表示常量，不能修改
+ * 
+ * 用来修饰接口的访问修饰符：
+ * 可见性修饰符：public
+ * 接口中变量需要定义为public static final 但可以不包含这些修饰符
+ * 编译器默认是这样
+ * 接口中方法只能使用public和abstract修饰符
+ * 
+ * 构造方法：不在讨论范围之内
+ * 
+ * 面向对象三大特征：封装，继承，多态
+ * 抽象类和接口：本质和功能
+ * 包和访问控制：
+ * 
+ * 
+ * 
+ * 
+ * */
+

@@ -1,0 +1,1021 @@
+1：java简介
+java由c++演变而来
+ 特点：简单 面向对象 分布式 解释性 可移植的 多线程 动态
+ java平台  .net平台
+jdk：java development kit
+my eclipse：ide工具
+
+配置环境变量：电脑 属性  高级属性  环境变量
+JAVA_HOME  jdk的路径
+CLASSPATH  .;%JAVA.....
+
+第一个java程序：
+
+*.java
+public class HelloWorld
+{
+    public static void main(String[] args)
+    {
+        System.out.println("Hello World!");
+    }
+}
+
+cmd:文件路径下  javac HelloWorld.java  编译java源程序
+
+生成一个class文件
+
+java 类名  //执行java字节码文件
+
+2：jdk
+
+目录结构：bin  db：数据库系统   include：头文件，动态链接库
+jre：最重要//java运行式环境    lib：dt.jar tools.jar
+
+src.zip:jdk所带的源码 很重要
+
+JRE:Java Runtime Environment   运行需要
+JDK:Java Development Toolkit  开发需要  包含jre
+
+JVM：java虚拟机
+java执行过程：java源程序--编译--字节码程序--jvm解释运行--操作系统--裸机
+
+编译型源程序 --》可执行程序 exe--操作系统
+JVM：不能跨平台  不同系统不同jvm   class文件可以跨平台
+JVM负责与操作系统交互并调用操作系统api，jvm负责java程序的内存分配和内存释放
+，其中有著名的垃圾回收机制
+
+eclipse：开放源代码的基于java的可扩展卡法平台  一个框架和一组服务
+用于通过插件组件去
+
+eclipse:window  preferences--java installed jres  --确认是自己安装的jre
+改变字体风格：还是那里面 general fonts
+编译器版本：一般1.6 选最高
+疑难杂症：
+
+
+1：设置工作空间
+2：传建项目
+3：创建类
+4：编写主方法
+5：运行
+
+class和源文件放在不同文件夹，bin和src里
+
+第三讲：分析helloworld   数据类型
+
+public class HelloWorld{//类
+ public static void main(String[] args){
+  System.out.println("hello world!");
+ }//主方法
+}
+
+java基本组成单位是类
+主方法写法固定：public static void main(String[] args)
+
+单行注释：//  多行注释：/* */  文档注释：/**  */
+
+*.java源程序可以有多个类，但是public的类只能有一个，且其名字必须和文件名一样
+refactor  --rename  改名字
+
+任何一个含有main方法的类都可以运行，在一个java工程中可以包含多个主方法 main
+
+java标识符：由数字，字母和_ $ 组成，java区分大小写，首位不能是数字
+java关键字不能当做标识符
+
+java数据类型：基本数据类型：int char double float boolean
+引用数据类型：string 对象
+byte：1个字节
+short：2个字节
+char：2个字节
+int：4个字节
+long：8个字节
+float：4个字节
+double：8个字节
+
+java表示一个接近于宇宙级别大数字：Biginteger   BigDecimal
+
+java的char  和c中char占一个字节
+java字符类型：unicode字符集  支持中文等  定义bool值 true和false
+c中：ASCII码字符集 不支持中文   没有专门定义bool  0为假，非0为真
+
+第四讲：数据类型转换  转义字符  基本输入输出  数制转换
+
+低精度数据可以自动转换为高精度数据  int --》double
+高精度数据必须强行转换为低精度数据  int n = (int)double;//不遵循四舍五入
+char和int转换：相互转换 (char)(n+32)  int n = a;char a = 'a';
+
+转义字符：\n  换行     System.out.print("Hello china");不换行的输出
+System.out.print("Hello china\n");//相当于println
+
+\"  :输出" \\：即输出\  \':输出'
+
+基本输入输出：System.out:向标准输出设备输出   控制台即是显示器
+Scanner：类型的对象  用于键盘输出
+
+Scanner input = new Scanner(System.in);
+input.nextInt();
+input.nextBoolean();
+input.nextDouble();
+input.next();字符串
+0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
+0000,0001,0010,0011...
+0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F
+
+十进制和二进制：97 = 64+32+1 =》 1100001
+十进制和八进制 十六进制：二进制作为桥梁
+97=>1100001  001 100 001==>141 八进制   0110 0001==》61 十六进制
+
+Integer.toBinaryString(n);//转换为二进制数 int n = 43;
+Integer.toOctalString(n);//转换成八进制
+Integer.toHexString(n);//转换成十六进制
+
+
+第五讲：算术运算符 关系 逻辑 位
++ - * / % 求模：取决于分子，除数若为负，则余数是负数
+
+自增自减：++n:先运算在取值 n++：先取值再运算
+
+> < >= !=
+&& || ! 与或非
+
+&:按位与 转换二进制  看位数都是1才是1，有0的话是0  10&7 = 2；
+|:按位或 转换二进制  看位数有一个是1就是1，二者皆为0的话是0  10|7 = 15;
+~:按位取反 转换二进制 先数字获得反码，再获得反码的补码 得到结果
+^:按位异或 转换二进制 二者相同为0，二者不同为1,10^7 = 13;
+>>:右移 相当于除以2除两回  二进制右移两位
+<<:左移 相当于乘以2乘2回  二进制左移两位
+
+例子：0000 1010  比较  0000 0111  开头一个表示正负 0为正，1为负
+
+负数补码=反码 + 1  反码：除了符号位之外各位取反
+
+赋值：变量 = 表达式  x = x+y;y=x-y;x=x-y; // 二者交换
+x = x ^ y;y = x ^ y;x = x ^ y;//二者交换
+
+第六讲：
+顺序结构
+选择结构
+循环结构
+
+简单 多重 嵌套 if-else语句
+if(){}else if(){}..else{}-->最后else可省略
+int score;
+Scanner in = new Scanner(System.in);
+System.out.println("请输入考试成绩");
+score = in.nextInt();
+
+if(score >=90&&score<=100){
+    System.out.println("成绩优秀");
+}else if(score >=80&&score<=89){
+    System.out.println("成绩良好");
+}..
+
+if(score > 100 || score <0){
+System.exit(0);//表示程序的退出
+}
+
+//嵌套
+int second;
+String gender;
+
+Scanner in = new Scanner(System.in);
+System.out.println("请输入性别：(男/女)");
+gender = in.next();
+System.out.println("请输入你的百米成绩(秒):");
+second = in.nextInt();
+
+if(second <12){
+    if(gender.equals("男")){
+        System.out.println("恭喜你进入男子决赛");
+    }else{
+        System.out.println("恭喜你进入女子决赛");
+    }
+}else{
+    System.out.println("你没进入决赛");
+}
+
+switch-case语句：
+switch(){
+    case ():
+        执行;
+        break;
+    case ():
+            执行;
+            break;
+    case ():
+            执行;
+            break;
+    default:
+        执行;
+        break;
+}//适合判断一个点
+//练习：
+double totalPrice;
+int startPrice;
+int hours;
+int distance;
+
+Scanner in = new Scanner(System.in);
+System.out.println("请输入你打车时间(0-23)");
+hours = in.nextInt();
+System.out.println("请输入你打车距离：");
+distance = in.nextInt();
+
+if(hours >=6&&hours<=21){
+    startPrice = 6;
+}else{
+    startPrice = 7;
+}
+
+if(distance >2){
+    totalPrice = startPrice + (distance - 2)*1.5;
+}else{
+    totalPrice = startPrice;
+}
+totalPrice++;
+System.out.println("你这次乘车的总费用是："+totalPrice+"￥");
+
+第七讲：循环  do while和while
+反复不停执行动作 循环变量，循环条件，循环体
+do{
+    循环体;
+}while(条件);
+while(条件){
+
+}
+//  。。独立的花括号内容是代码块，不是循环体
+先判断在循环，先循环再判断
+
+第八讲：for while break continue
+
+for和javascript中差不多，不能空，三个都要有
+break：跳出整个循环
+continue:结束本次循环。开始新循环
+
+Math.sqrt(num);//一个数的平方根
+判断素数用全部数效率低，可以除到数字的平方根即可
+BuyCock：
+int gj;
+int mj;
+int xj;
+
+for(gj=0;gj<=20;gj++){
+    for(mj=0;mj<=33;mj++){
+        for(xj=0;xj<=100;xj++){
+            //首先小鸡的数量必须是3的倍数
+            if(xj%3 == 0){
+                if((xj + mj+gj==100) &&(xj/3+mj*3+gj*5 ==100) ){
+                    System.out.println("公鸡"+gj +"母鸡"+mj+"小鸡"+xj);
+                }
+            }
+        }
+    }
+}
+
+i%10;
+(i/10)%10;..
+int
+int不能定义身份证号码用BigInteger
+
+String sid;
+Scanner in = new Scanner(System.in);
+System.out.println("请输入身份证号码");
+sid = in.next();
+BigInteger id = new BigInteger(sid);
+
+do{
+    temp +=id.mod(new BigInteger("10")).intValue();//模十
+    id = id.divide(new BigInteger("10"));//除以十
+    if(id.intValue() ==0){
+        break;
+    }
+}while(true);
+if(temp%13 == 0){
+    System.out.println("恭喜中奖");
+}else{
+    System.out.println("下次好运");
+}
+
+
+第十讲：数组
+充当容器：三大特征：连续的，大小固定，数据类型完全一致
+
+int[] arr = new int[10];//长度为十的整型数组
+arr[0] = 100;//第一个元素
+arr[1] = 200;
+arr[2] = 14;
+arr[3] = -230;
+arr[4] = 20;
+//字符类型和整型可以相互转化 （char和int） char:'A'
+arr.length;//数组长度固定，不能访问第十一个元素
+
+数组初始化：
+1：动态初始化：int[] arr = new int[100];//不指定元素默认为0
+2：静态初始化：int[] arr = {12,3,4,5,2,34,25,19};//8位大小固定，不能改变
+
+三大操作：
+遍历：使用循环和下标完成数组遍历
+    for(int i=0;i<arr.length;i++){
+        System.out.print(arr[i]+" ");
+    }
+crud：
+
+排序：使用Arrays.sort();轻松实现排序
+Arrays.sort(arr);//对arr进行升序排序
+降序把循环条件改变：从后到前即可
+
+第十一讲：函数：独立功能一段代码
+函数组成：
+有参函数和无参函数：
+实参和形参：
+
+public static int add(int a,int b){
+ return a+b;
+}
+
+public static void main(String[] args){
+    int x = 10;
+    int y = 20;
+    System.out.println(add(x,y));
+}
+
+函数返回类型:非必须 函数名字：必须 参数列表：必须 函数体：必须
+int add(int a,int b){
+    int c = a+b;
+    return c;
+}
+
+无参函数：没参数传入
+形参：定义处的参数
+实参：传入的参数，实参把自己的值拷贝了一份给形参
+提高代码可复用性
+
+第十二讲：函数递归，万年历
+n!:用递归来实现
+public static double jieCheng(int n){
+    if(n == 1){
+        return 1;
+    }else{
+        return n*jieCheng(n-1);//这里用递归
+    }
+}
+public static void main(String[] args){
+    int n =5;
+    jieCheng(n);
+    }
+//万年历：
+public static boolean isRun(int year){
+    if((year%4 ==0&&year%100!=0)||(year%400 ==0)){
+        return true;
+    }else{
+        return false;
+    }
+}
+public static int getMonthDays(int year,int month){
+    int days = 31;
+    switch(month){
+        case 4:
+        case 6:
+        case 9:
+        case 11:
+            days = 30;
+            break;
+        case 2:
+        if(isRun(year)){
+            days = 29;
+        }else{
+            days = 28;
+        }
+        break;
+    }
+    return days;
+}
+public static int getTotalDays(int year,int month){
+    int totalDays = 0;
+    for(int i=1900;i<year;i++){
+        if(isRun(i)){
+            totalDays+=366;
+        }else{
+            totalDays+=365;
+        }
+    }
+    for(int i=1;i<month;i++){
+        totalDays += getMonthDays(year,i);
+    }
+    return totalDays;
+}//计算给定年份和月分，计算这个月第一天距离1900-1-1过来多少天
+
+public static void main(String[] args){
+
+int year;
+int month;
+int day;//第一天是星期几
+int totalDays;//距离1900-1-1过了多少天
+int MonthDays;//该月总天数
+
+Scanner in = new Scanner(System.in);
+System.out.println("*****欢迎使用万年历*****");
+System.out.println("请输入年份");
+year = in.nextInt();
+System.out.println("请输入月份");
+month = in.nextInt();
+System.out.println("你输入的是"+year+"年"+month+"月");
+if(isRun(year)){
+    System.out.println("是闰年");
+}else{
+    System.out.println("是平年");
+}
+monthDays = getMonthDays(year,month);
+totalDays = getTotalDays(year,month);
+totalDays++;
+day = totalDays%7;
+
+System.out.println("星期日\t星期一\t星期二\t星期三\t星期四\t星期五\t星期六\t");
+int iCount=0;//计数器，用来决定是否换行
+for(int i=0;i<day;i++){
+    System.out.print("\t");
+    iCount++;
+}
+for(int i=1;i<monthDays;i++){
+    System.out.print(i+"\t");
+    iCount++;
+    if(iCount%7 == 0){
+        System.out.println();
+    }
+}
+}
+
+第十三讲：对象，类，构造方法，引用
+对象：世界上每一个客观存在的东西  object
+object oriented programming 面向对象编程
+类：对具有相同特征的一组对象的集合或者抽象
+//类：属性和方法
+属性：描述类的静态特征 attribute
+方法：描述类的动态特征 method
+
+类是对象的抽象
+对象是类的实例
+如何生成对象？
+实例：编写个类
+puiblic class Human{//人类
+//属性
+    String name;
+    String gender;
+    int age;
+
+    //方法
+    public void thinking(){
+        System.out.println("正在思考ing。。。");
+    }
+    public void eat(){
+        System.out.println("正在吃饭ing。。。");
+    }
+    public void sleep(){
+            System.out.println("正在碎觉ing。。。");
+    }
+    public void introduce(){
+        System.out.println("我叫"+this.name+"性别"+this.gender+"年龄"+age);
+    }
+    public static void main(String[] args){
+        Human h1 = new Human();
+        h1.name = "张";
+        h1.gender = "男";
+        h1.age = 20;
+        h1.introduce();
+    }
+}
+
+构造方法：名字与类名完全相同，且没有返回类型的方法
+作用：初始化对象
+若用户没有创建自定义的构造方法，系统会默认提供一个不带任何参数且方法体为空的构造方法
+Human(){}就是这样的
+
+自定义构造方法：
+Human(){
+    this.name = "时";
+    this.gender = "男";
+    this.age = 21;
+}
+Human(String name,String gender,int age){
+    this();//调用不带参数的构造方法
+    this.name = name;
+    this.gender = gender;
+    this.age = age;
+}
+
+void：有返回类型，为空   而构造方法没有返回类型
+
+class Person{
+    String name;
+    int age;
+    Person(String name,int age){
+        this.name = name;
+        this.age = age;
+    }
+}
+Person p = new Person("张",20);
+p-->引用   new Person是对象
+引用：是一种数据类型，是一个对象的别名，不等于对象
+java数据类型：基本类型，引用类型
+引用可以指向一个对象
+
+Human h1 = new Human();//关键字 构造方法
+类型  引用  对象
+//成员方法 public void。。 主方法：public void main
+
+引用指向对象
+h1.name = "";
+h1.introduce();
+
+第十四讲：方法重载 静态属性方法 栈内存和堆内存 基本数据类型和引用数据类型
+
+方法重载：overload  方法名字相同，方法参数的个数，类型，次序不同
+注意：参数次序不同，也会造成方法重载
+方法返回类型不同，不构成方法重载
+构造方法重载，是方法重载最常见形式
+
+静态属性和方法：推荐使用类名去访问，而不是对象
+静态的属于类而不属于对象，既可以使用对象来访问也可以使用类名来访问
+static int number = 0;
+p1.number;//0
+
+public static void worldPeace(){
+    System.out.println("呼吁世界和平");
+}
+
+Person.worldPeace();//使用类名去访问  推荐
+p1.worldPeace();//对象访问也可以
+p2.worldPeace();
+
+Person p1 = new Person();
+
+//静态代码块：在构造方法之前执行并且只执行一次
+static{
+    System.out.println("静态代码块");
+}
+
+堆栈内存：栈内存：顺序结构    china
+堆内存：离散结构  c-h-i-n-a
+基本数据类型：栈内存中分配
+引用数据类型：堆内存中分配
+
+new一个对象：堆内存中分配
+
+对象：一定在堆内存中创建   new Integer(100);
+凡是new出来的都是不同对象，无论多相像
+
+使用eclipse导入现有工程：先关闭，copy到其他地方，在删除，导入即可
+
+第十五讲：封装性，匿名对象，main方法 实例
+
+面向对象三大特征：封装，继承，多态
+封装：隐藏实现细节，更易于维护，也更安全
+类：就是一个封装体，封装了属性和方法
+匿名对象：没有别名的对象
+public class Person{
+String name;
+    int age;
+    Person(){
+
+    }
+    Person(String name,int age){
+        this.name = name;
+        this.age = age;
+    }
+    public static void main(String[] args){//main:args是传入的参数数组
+        new Person("张三",20).thinking;
+    }
+    public void thinking(){
+    System.out.println(this.name + "在思考");
+    }
+}
+
+//实例：设计学生类
+String sid;
+String name;
+char gender;//M F 表示男女
+int age;
+String major;
+String email;
+String qq;
+String address;
+
+static int number = 0;
+Students(){
+    System.out.println("创建了一个学生。。");
+    number++;
+}
+Students(String sid,String name,char gender,int age,String major,String email,String qq,String address){
+    this();
+    this.sid = sid;
+    this.name = name;
+    this.gender = gender;
+    this.age = age;
+    this.major = major;
+    this.email = email;
+    this.qq = qq;
+    this.address = address;
+}
+public void goToClassroom(){
+    System.out.println(this.name+"去教室");
+}
+public void goToExam(){
+    System.out.println(this.name+"去考试");
+}
+public static void study(){
+    System.out.println(this.name+"good good study");
+}
+public static void main(String[] args){
+    Students s = new Students("s001","郭美美","F",18,"工商管理","gmm@126.com",12345,"西安市大学");
+    s.goToClassroom();
+    s.goToExam();
+    System.out.println("学生人数："+this.number);
+}
+//设计手机类：
+设计类时要注意的问题：
+先设计属性，再设计方法
+属性使用名词
+方法使用动词
+考虑构造方法的重载
+设计类一定要合理，适当的颗粒度，不能太粗也不能太细
+
+第十六讲：String类
+String类：字符串类 使用频率最高
+属于引用数据类型
+静态初始化：在字符串常量池里分配空间  也在堆内存中
+动态初始化：在堆内存里分配空间
+String s1 = "hello china!";//静态初始化
+String s3 = "hello china!";//静态初始化
+String s2 = new String("hello china!");//动态初始化
+String s4 = new String("hello china!");//动态初始化
+s1和s3是同一对象，s2和s4不是同一对象
+静态初始化：字符串常量池中先查找有木有，有的话就指向那个对象
+
+String类常用方法：
+s1.charAt(6);//返回字符'c'
+s1.compareTo(s5);//比较两字符串大小 返回正负整数 s1>s5:返回正
+    =：0 <:负
+String s6="ok!";
+s1.concat(s6);//字符串拼接 hello china!ok!
+    s1+s6;//即可
+s1.contains("china");//包含  返回boolean： true
+s1.equals(s3);//判断两字符串内容是否相等  true
+getBytes();//返回字节数组  byte[] arr=s1.getBytes();
+indexOf();//查找子串下标 s1.indexOf("china");//6  第一次出现的下标
+lastIndexOf();//最后一次出现的下标
+s1.split();//分割字符串。返回字符串数组   里面用到"|"要用转义字符
+    String s7 = "北京|伤害|南京|武汉";String[] cityes = s7.split("\\|");
+    for(int i=0;i<sityes.length;i++){cityes[i]}
+StringTokenizer st = new StringTokenizer(s7,"|");
+while(st.hasMoreElements()){
+    st.nextElement();
+}//效果和上面一样
+s1.substring(6,s1.length-1);//开始到结束的位置截取下来 不包括后面下标处字符
+toString();//对象转换成字符串
+toUpperCase();
+toLowerCase();
+
+==对象是否相等
+
+第十七讲：引用传递  this关键字 实例 java编程规范
+引用传递：本质也是传值
+通过引用传递可以改变实参对象的内容，但是不能改变实参对象
+public class Cup{
+    String owner;
+    String content;
+    Cup(){
+    }
+    Cup(String owner,String content){
+        this.owner = owner;
+        this.content = content;
+    }
+    public static void changeContent(Cup c){//引用传递
+        c.content = "普洱茶";
+        c = new Cup();
+        c.content = "可口可乐";
+    }
+    public void showContent(){
+        System.out.println(this.owner+"的水杯装着"+this.content);
+    }
+    public static void main(String[] args){
+        Cup c = new Cup("张三丰","碧螺春");
+        c.showContent();
+        Cup.changeContent(c);
+        c.showContent();
+    }
+
+}//不会改变主方法中c的content
+
+引用传递：传的值是hash code值     实参和形参指向同一个对象   java参数传递都是值传递
+
+this关键字：this指向当前对象，指调用当前方法的那个对象
+指向当前对象：
+调用构造方法：this();//必须放在构造方法的第一句
+this(name,age);//调用带两个参数的构造方法
+
+静态方法只能调用静态成员，包括静态属性和静态方法，而实例方法可以调用所有属性和方法
+静态方法可以用类名和对象名调用，实例方法只能对象调用
+
+实例：设计两个类 在引用
+class Books{
+    String name;
+    String author;
+    String press;
+    String lender;
+
+    Books(String name,String author,String press){
+        this.name = name;
+        this.author = author;
+        this.press = press;
+    }
+    public void showInfo(){
+        System.out.println("书名"+this.name);
+    }
+}
+
+public class Students{
+    String sid;
+    String name;
+    int age;
+
+    Students(String sid,String name,int age){
+        this.sid = sid;
+        this.name = name;
+        this.age = age;
+    }
+    public void lendBook(Books book){
+        book.lender = this.name;
+    }
+
+    public static void main(String[] args){
+        Books b = new Books("java编程思想","后勤","电子工业出版社");
+        Students s = new Students("s001","黎明",20);
+        s.lendBook();
+        b.showInfo();
+    }
+}
+
+java编程规范：见名知意  驼峰标志  类名大写  只允许字符串和注释中出现中文
+详细的注释
+
+第十八讲：对象数组，内部类
+对象数组：Object[]
+实例：设计学生类
+public class Students{
+    String name;
+    char gender;//M表示男，F表示女
+    int age;
+
+    Students(){
+    System.out.println("创建了一个学生对象");
+    }
+
+    Students(String name,char gender,int age){
+        this();
+        this.name = name;
+        this.gender = gender;
+        this.age = age;
+    }
+
+    public void introduce(){
+        System.out.println("姓名"+this.name+"性别"+this.gender+"年龄"+this.age);
+    }
+}
+
+
+public class Test{
+
+    public static int getGenderNumber(Students[] stus,char gender){
+        int male_number;
+        int female_number;
+        for(Students s:stus){
+            if(s.gender=='M'||s.gender =='m'){
+                male_number++;
+            }else if(s.gender=='F'||s.gender =='f'){
+                female_number++;
+            }
+        }
+        if(gender == 'M'|| gender =='m'){
+            return male_number;
+        }else{
+            return female_number;
+        }
+
+    }
+    //统计班级平均年龄
+    public static int averageAge(Students[] stus){
+        int sum=0;
+        for(Students s:stus){
+            sum+=s.age;
+        }
+        return sum/stus.length;
+    }
+
+    public static void main(String[] args){
+        Students[] stus = {
+            new Students("张三","M",20),
+            new Students("李四","F",19),
+            new Students("王五","M",29),
+            new Students("赵六","F",25),
+            new Students("孙琦","F",24)
+        };
+        //增强型for循环，foreach循环
+        for(Students s:stus){
+            s.introduce();
+        }
+        System.out.println("-----------");
+        Test.getGenderNumber(stus,'M');//班级男生人数
+        Test.getGenderNumber(stus,'F');//班级女生人数
+        Test.averageAge(stus);//平均年龄
+    }
+}
+
+内部类：在类体内定义的类  四种情况
+类体中定义的普通类：
+类体中定义的静态类：
+成员方法中定义的内部类：
+静态方法中定义的内部类：
+
+public class Outer{
+    String name;
+    Outer(){
+        System.out.println("Outer class constructor..");
+    }
+    Outer(String name){
+        this();
+        this.name = name;
+    }
+    public void showName(){
+        System.out.println(this.name);
+    }
+
+    //定义一个普通的内部类
+    class Inner{
+        String name;
+            Inner(){
+                System.out.println("Inner class constructor..");
+            }
+            Inner(String name){
+                this();
+                this.name = name;
+            }
+            public void showName(){
+                System.out.println(this.name);
+            }
+    }
+
+    //静态的内部类
+    static class Inner2{
+        Inner2(){
+            System.out.println("Inner class constructor..");
+        }
+        Inner2(String name){
+            this();
+            this.name = name;
+        }
+        public void showName(){
+            System.out.println(this.name);
+        }
+    }
+
+    //成员方法中定义的内部类
+    public void fun(String name){
+        //在成员方法中定义一个内部类
+        class Inner3(){
+            Inner3(){
+                System.out.println("Inner class constructor..");
+            }
+            Inner3(String name){
+                this();
+                this.name = name;
+            }
+            public void showName(){
+                System.out.println(this.name);
+            }
+        }
+        new Inner3(name).showName();
+    }
+
+    //静态方法中的内部类
+    public static void method(String name){
+        class Inner4{
+            Inner4(){
+                System.out.println("Inner class constructor..");
+            }
+            Inner4(String name){
+                this();
+                this.name = name;
+            }
+            public void showName(){
+                System.out.println(this.name);
+            }
+        }
+        new Inner4(name).showName();
+    }
+
+    public static void main(String[] args){
+        Outer outer = new Outer("张");
+        outer.showName();
+
+        Inner inner = new Outer().new Inner("李四");//先生成外部类对象，在调用内部类对象
+        inner.showName();
+
+        Outer.Inner2 inner2 = new Inner2("王五");
+        inner2.showName();
+
+        outer.fun("赵六");
+
+        Outer.method("孙琦");//类名直接调用静态方法
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,83 @@
+/*27讲：封装，继承 多态和包 访问控制权限等来做
+ * 金庸群侠传：KongfuDemo
+ * 
+ * 28讲：异常  异常继承结构   异常处理
+ * 异常：exception  意料之外的情景   编译异常  运行异常，不可预料异常
+ * 异常继承结构：
+ * error --》throwable《--exception《RuntimeException--
+ *                          《非运行时异常
+ * Throwable类是java语言中所有错误或者异常的父类  他有两子类
+ *    Error 和 Exception
+ * Error：用于指示合理的应用程序不应该试图捕获的严重问题
+ *        很大情况，你不用管他，不能处理
+ * Exception：指出了合理的应用程序想要捕获的条件
+ * 分成两类：
+ * CheckedException：需要用try  catch  显示的捕获  可检查的异常
+ * unCheckedException：不可检查的异常     不需要捕获
+ * 
+ * ExceptionDemo：
+ * ExceptionTest：
+ * public static void main(String[] args){
+ * 		try{
+ * 			int x = 10;
+ * 			int y = 0;
+ * 			System.out.println(x/y);//在运行时会抛出异常
+ * 				
+ * 			Class.forName("cn.com.A");//加载cn.com.A类
+ * 		}
+ * 		catch(ArithmeticException ex){
+ * 			System.out.println("分母不能为0");
+ * }
+ * 		catch(ClassNotFoundException ex)
+ * 		{
+ * 			ex.printStackTrace();
+ * 			System.out.println("加载异常！");
+ * 
+ * }
+ * }//异常之后代码不会被执行
+ * 
+ * 常见RuntimeException：IllegalArgumentException
+ * 空指针异常：引用没指向任何对象  NullPointerException
+ * 数组下标越界异常：ArrayIndexOutOfBoundsException
+ * 
+ * 
+ * public static Person p;//引用没指向任何对象
+ * public static void fn(){
+ * 		p.sayHello();
+ * }
+ * 
+ * 异常处理：
+ * try{}catch(Exception ex){}finally{}
+ * finally:表示无论发生异常，一定要执行
+ * 注意：finally子句碰到return语句也会执行，除非碰到System.exit(0);
+ * finally语句通常用来执行释放资源的代码，比如：关闭连接，关闭文件
+ * 等等。
+ * System.exit(0);//程序无条件退出
+ * 
+ * try{}catch(Exception ex){}
+ * try{}finally{}
+ * 
+ * 29讲：自定义异常类，继承与异常，throw与throws，jdk帮助文档的使用
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * */
