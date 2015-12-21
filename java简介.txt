@@ -1,4 +1,4 @@
-1：java简介
+﻿1：java简介
 java由c++演变而来
  特点：简单 面向对象 分布式 解释性 可移植的 多线程 动态
  java平台  .net平台
@@ -928,6 +928,19 @@ public class Outer{
         Outer.method("孙琦");//类名直接调用静态方法
     }
 
+}
+
+public class nameValid(){
+	string name;
+	int age;
+	string school;
+	public getname(){
+		return this.name;
+}
+	public setName(string name){
+		this.name = name;
+		return this.name; 
+}
 }
 
 
